@@ -1,0 +1,176 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img style="max-width:150px; margin-top: -7px;" src="img/logo_SEnC.png" /></a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right"> <!-- ng-if="vm.auth.isAuthenticated()"-->
+        <!--li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-comment fa-fw"></i> New Comment
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                            <span class="pull-right text-muted small">12 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-envelope fa-fw"></i> Message Sent
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-tasks fa-fw"></i> New Task
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a class="text-center" href="#">
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li-->
+        <!-- /.dropdown-alerts -->
+        <!-- /.dropdown -->
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw" ng-if="!vm.auth.isAuthenticated()"></i>
+                <img ng-src="{{ vm.profile.picture }}" class="avatar img-responsive img-circle img-thumbnail" alt="avatar" ng-if="vm.auth.isAuthenticated()">
+                  <!--i class="fa fa-caret-down"></i-->
+            </a>
+            <ul class="dropdown-menu dropdown-user" ng-if="vm.auth.isAuthenticated()">
+                <li><a href="/profile"><i class="fa fa-user fa-fw"></i> Perfil de {{ vm.profile.nickname }}</a>
+                </li>
+                <!--li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                </li-->
+                <li class="divider"></li>
+                <li><a href="#" ng-click="vm.auth.logout()"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <!--input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="fa fa-search"></i>
+                        </button-->
+                    </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li>
+                    <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                </li>
+                <!--li>
+                    <a href="#/graficos"><i class="fa fa-bar-chart-o fa-fw"></i> Metas</a>
+                </li-->
+                <li>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Configura&ccedil;&otilde;es<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/config-category">Categorias</a>
+                        </li>
+                        <li>
+                            <a href="/config-payment">Formas de Pagamentos</a>
+                        </li>
+                        <li>
+                            <a href="/config-goal"><i class="fa fa-bar-chart-o fa-fw"></i> Metas</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--li>
+                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Limites</a>
+                </li-->
+                <li>
+                    <a href="/entry-list"><i class="fa fa-table fa-fw"></i> Lan&ccedil;amentos</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-certificate fa-fw"></i> Quero Aprender a Investir!</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>
+
+
+
+
+<!--nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Auth0 - AngularJS</a>
+
+      <button
+        class="btn btn-primary btn-margin"
+        ui-sref="home">
+          Home
+      </button>
+
+      <button
+        class="btn btn-primary btn-margin"
+        ng-if="!vm.auth.isAuthenticated()"
+        ng-click="vm.auth.login()">
+          Log In
+      </button>
+
+      <button
+        class="btn btn-primary btn-margin"
+        ng-if="vm.auth.isAuthenticated()"
+        ng-click="vm.auth.logout()">
+          Log Out
+      </button>
+
+    </div>
+  </div>
+</nav-->

@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{title}}</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--a class="navbar-brand" href="#">Brand</a-->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <!--span class="sr-only">(current)</span-->
+                    <li><a href="#" data-toggle="modal" data-target="#myModal" ng-click="toggleModal(null)">Nova Categoria </a></li>                                
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Pesquisar">
+                    </div>
+                    <button type="submit" class="btn btn-default">Pesquisar</button>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Nro. Lançamentos</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="model in categoryList" ng-class="model.idPai==0 ? 'info' : ''">
+                    <td><span ng-if="model.idPai>0">&nbsp;&nbsp;</span>{{model.nome}}</td>
+                    <td><b>{{model.lancamentosCount}}</b></td>
+                    <td>                                    
+                        <a ng-click="toggleModal(model)" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+                        </a>&nbsp;
+                        <a ng-if="model.idPai==0" ng-click="toggleModal(null)" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Nova Categoria</h4>
+      </div>
+      <form>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="txtDescription" class="col-md-2 control-label">Categoria Superior: </label>
+                <div>
+                    <select class="form-control" id="selSupCategory" data-ng-model="entry.idPai" required>
+                        <option ng-repeat="model in categoryList" ng-if="model.idPai==0" value="{{model.id}}">{{model.nome}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="txtDescription" class="col-md-2 control-label">Descrição: </label>
+                <div>
+                    <input type="text" class="form-control" name="txtDescription" data-ng-model="entry.nome" placeholder="Insira a descrição da categoria" required>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" ng-if="entry" class="btn btn-danger" ng-click="deleteData()" data-dismiss="modal">Excluir</button>
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success" ng-click="sendData()" data-dismiss="modal">Salvar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

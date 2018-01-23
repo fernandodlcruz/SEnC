@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{title}}</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--a class="navbar-brand" href="#">Brand</a-->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!--ul class="nav navbar-nav">
+                    <span class="sr-only">(current)</span>
+                    <li><button class="btn btn-success">Atualizar Metas</button></li>
+                </ul-->
+                <form class="navbar-form navbar-left">
+                    <!--div class="form-group">
+                        <input type="text" class="form-control" placeholder="Pesquisar">
+                    </div-->
+                    <button type="submit" class="btn btn-success">Atualizar Metas</button>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-md-8">Nome</th>
+                    <th class="col-md-4">Meta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="model in categoryList" ng-class="model.root==0 ? 'info' : ''">
+                    <td class="col-md-8"><span ng-if="model.root==1">&nbsp;&nbsp;</span>{{model.description}}</td>
+                    <td class="col-md-4">
+                        <span ng-if="model.root==0" class="label label-primary">{{model.value | currency}}</span>
+                        <input type="text" ng-if="model.root==1" class="form-control" name="" ng-model="model.value" format="currency">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

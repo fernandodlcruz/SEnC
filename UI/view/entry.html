@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{title}}</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-table fa-fw"></i> Nova Conta a Pagar                            
+            </div>
+            <div class="panel-body">
+                <form id="signupform" class="form-horizontal" role="form">
+                    <div class="row col-md-10">
+                        <div class="form-group col-md-5">
+                            <div class="btn-group" role="group" data-toggle="buttons" aria-label="billType">
+                                <label class="btn btn-primary active" ng-click="isUnique = true">
+                                    <input type="radio" name="options" id="optUnique" autocomplete="off" checked> Única
+                                </label>
+                                <label class="btn btn-primary" ng-click="isUnique = false;recText = 'Qtde. Parcelas'">
+                                    <input type="radio" name="options" id="optDivided" autocomplete="off"> Parcelada
+                                </label>
+                                <label class="btn btn-primary" ng-click="isUnique = false;recText = 'Qtde. Meses'" >
+                                    <input type="radio" name="options" id="optRecurrence" autocomplete="off"> Recorrente
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="isUnique">
+                            <label for="txtRecurrence" class="col-md-2 control-label">{{recText}} </label>
+                            <div class="col-md-3">
+                                <div ng-if="recText == 'Qtde. Parcelas'">
+                                    <input type="text" class="form-control" name="txtRecurrence" data-ng-model="project.name" numbers-only maxlength="3" placeholder="Número de parcelas">
+                                    <span class="label label-warning">O número de pacelas dividirá o valor total a pagar</span>
+                                </div>
+                                <div ng-if="recText == 'Qtde. Meses'">
+                                    <p class="form-control-static">Recorrente até 31/12/2017 <span class="label label-danger">Será preciso rever seu planejamento após a virada no ano</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-12">
+                        <div class="form-group">
+                            <label for="txtDescription" class="col-md-2 control-label">Descrição </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="txtDescription" data-ng-model="entry.description" placeholder="Insira a descrição da conta" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtValue" class="col-md-2 control-label">Valor Total a Pagar </label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="txtValue" data-ng-model="entry.value" format="currency" placeholder="Valor total da conta" required>
+                            </div>
+                            <label for="selPaymentType" class="col-md-3 control-label">Forma de pagamento </label>
+                            <div class="col-md-3">
+                                <select class="form-control" id="selPaymentType" data-ng-model="entry.payMethod" required>
+                                    <option ng-repeat="option in payMethodList" value="{{option.description}}">{{option.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtDueDate" class="col-md-2 control-label">Data do gasto </label>
+                            <div id="sandbox-container" class="col-md-3">
+                                <div class="input-group date">
+                                    <input type="text" name="txtDueDate" class="form-control" data-ng-model="entry.date | date:'dd/MM/yyyy'" required><span class="input-group-addon"><i class="fa fa-table fa-fw"></i></span>
+                                </div>
+                            </div>
+                            <div ng-if="bill.pytype == 'C'">
+                                <label for="txtPayOutDate" class="col-md-3 control-label">Data da saida do dinheiro </label>
+                                <div id="sandbox-container" class="col-md-3">
+                                    <div class="input-group date">
+                                        <input type="text" name="txtPayOutDate" class="form-control"><span class="input-group-addon"><i class="fa fa-table fa-fw"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="selCategory" class="col-md-2 control-label">Categoria </label>
+                            <div class="col-md-3">
+                                <select class="form-control" id="selCategory" data-ng-model="entry.category" required>
+                                    <option ng-repeat="option in categoryList" value="{{option.description}}">{{option.description}}</option>
+                                </select>
+                            </div>
+                            <label for="comment" class="col-md-3 control-label">Observação</label>
+                            <div class="col-md-3">
+                                <textarea class="form-control" rows="5" data-ng-model="project.idea" id="comment"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-4 pull-right">
+                        <button class="btn btn-danger" type="button" ng-click="DeleteButton()">Excluir</button>
+                        <button class="btn btn-warning" type="button" ng-click="CancelButton()">Cancelar</button>
+                        <button class="btn btn-success" type="submit">Salvar</button>                                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-4 -->
+</div>
+<!-- /.row -->
+
+<!-- Morris Charts JavaScript -->
+<script src="js/raphael-min.js"></script>
+<!--script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script-->
+<script src="js/morris.min.js"></script>
+<!--script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script-->
+<script src="js/morris-data.js"></script>
+<script src="lib/bootstrap-datepicker.min.js"></script>
+<script>
+    $('#sandbox-container .input-group.date').datepicker({
+        //daysOfWeekDisabled: "1,2,3",
+        //todayHighlight: true,
+        //datesDisabled: ['05/06/2016', '05/21/2016']
+        format: "dd/mm/yyyy",
+        autoclose: true//,
+        //defaultViewDate: { year: 2017, month: 04, day: 25 }
+    });
+</script>

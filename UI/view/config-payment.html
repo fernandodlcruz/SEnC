@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{title}}</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--a class="navbar-brand" href="#">Brand</a-->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <!--span class="sr-only">(current)</span-->
+                    <li><a href="#" data-toggle="modal" data-target="#myModal" ng-click="toggleModal('', '')">Nova Forma de Pagamento </a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Pesquisar">
+                    </div>
+                    <button type="submit" class="btn btn-default">Pesquisar</button>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Nro. Lançamentos</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="model in paymentList">
+                    <td><span ng-if="model.root==1">&nbsp;&nbsp;</span>{{model.description}}</td>
+                    <td>{{model.value}}</td>
+                    <td>                                    
+                        <a ng-click="toggleModal(model.id, model.description)" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Nova Forma de Pagamento</h4>
+      </div>
+      <form>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="txtDescription" class="col-md-2 control-label">Descrição: </label>
+                <div>
+                    <input type="hidden" class="form-control" name="txtId" value="{{editId}}">
+                    <input type="text" class="form-control" name="txtDescription" value="{{editDescription}}" placeholder="Insira a descrição da forma de pagamento" required>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button"  ng-if="editDescription != ''" class="btn btn-danger" data-dismiss="modal">Excluir</button>
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success">Salvar</button>            
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

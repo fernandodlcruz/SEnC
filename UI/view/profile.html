@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{title}}</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default profile-area">
+            <div class="panel-body">
+                <img ng-src="{{ vm.profile.picture }}" class="avatar" alt="avatar">
+                <div>
+                    <label><i class="fa fa-user fa-fw"></i> Apelido</label>
+                    <h5 class="nickname">{{ vm.profile.nickname }}</h5>
+                </div>
+                <div>
+                    <label><i class="fa fa-envelope fa-fw"></i> Usuário/E-mail</label>
+                    <h5 class="name">{{ vm.profile.name }}</h5>
+                </div>
+                <!--pre class="full-profile">{{ vm.profile | json }}</pre-->
+            </div>
+        </div>
+    </div>
+</div>
